@@ -1,0 +1,5 @@
+CompileFlags:
+    # Relative to this file: use this project's own build/compile_commands.json
+    CompilationDatabase: build
+    # Strip GCC/Xtensa-specific flags clang doesn't understand
+    Remove: [-f*, -m*]

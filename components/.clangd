@@ -1,0 +1,11 @@
+CompileFlags:
+    # Shared components live outside all three projects. clangd needs a compile
+    # database; borrow Compass's, which covers the ESP-IDF build of both
+    # components (run a Compass build first to generate it).
+    #
+    # The Pico port files (port/*_pico.c) are not in that database and will show
+    # as unconfigured. Point CompilationDatabase at ../Tracker/build instead if
+    # you are working on those.
+    CompilationDatabase: ../Compass/build
+    # Strip GCC/Xtensa-specific flags clang doesn't understand
+    Remove: [-f*, -m*]

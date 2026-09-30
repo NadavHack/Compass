@@ -1,0 +1,38 @@
+menu "NEO-M8N GPS Configuration"
+
+config NEO_M8N_UART_NUM
+    int "UART port"
+    range 0 2
+    default 2
+    help
+        UART peripheral the NEO-M8N is wired to. UART0 is normally taken by the
+        serial monitor, so UART1 or UART2 is the usual choice.
+
+config NEO_M8N_TX_GPIO
+    int "TX GPIO (MCU -> module RX)"
+    range -1 48
+    default 17
+    help
+        Drives the module's RX pin. Needed only to configure the receiver over
+        UBX; set to -1 for a receive-only wiring, which also requires turning
+        off auto_config in neo_m8n_config_t.
+
+config NEO_M8N_RX_GPIO
+    int "RX GPIO (MCU <- module TX)"
+    range 0 48
+    default 16
+    help
+        Reads the module's TX pin. Always required.
+
+config NEO_M8N_BAUD
+    int "Initial baud rate"
+    default 9600
+    help
+        The rate the module is speaking when the MCU starts, not the rate you
+        want. A factory-fresh NEO-M8N uses 9600; change this only if the module
+        has had a different rate saved into its flash.
+
+        To run faster, leave this at 9600 and set target_baud in
+        neo_m8n_config_t - the driver will switch both ends over.
+
+endmenu
